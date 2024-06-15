@@ -1,11 +1,13 @@
-package mx.uv.djdl.champBuild;
-
+package mx.uv.djdl.champBuild.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+
+import mx.uv.djdl.champBuild.model.ChampBuild;
+
 import org.bson.Document;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +20,10 @@ public class ChampBuildRepository {
 
     private MongoCollection<Document> collection;
 
-
     @jakarta.annotation.PostConstruct
     public void initialize() {
-            MongoDatabase database = mongoClient.getDatabase("Lol");
-            collection = database.getCollection("Builds");
-        
+        MongoDatabase database = mongoClient.getDatabase("Lol");
+        collection = database.getCollection("Builds");
     }
 
     public List<ChampBuild> findAll() {
@@ -46,9 +46,16 @@ public class ChampBuildRepository {
     }
 
     public void save(ChampBuild build) {
+        Document query = new Document("champName", build.getChampName())
+                         .append("items", build.getItems());
+        if (collection.find(query).first() != null) {
+            throw new IllegalArgumentException("Ya existe una build con el mismo champName y lista de items");
+        } 
+        else {
         Document doc = champBuildToDocument(build);
         collection.insertOne(doc);
-    }
+    }}
+    
 
     public void update(ChampBuild build) {
         Document query = new Document("champName", build.getChampName());

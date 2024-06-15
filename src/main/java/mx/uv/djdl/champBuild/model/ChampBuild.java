@@ -1,4 +1,4 @@
-package mx.uv.djdl.champBuild;
+    package mx.uv.djdl.champBuild.model;
 
 import java.util.List;
 

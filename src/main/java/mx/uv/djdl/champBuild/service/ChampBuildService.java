@@ -1,7 +1,10 @@
-package mx.uv.djdl.champBuild;
+package mx.uv.djdl.champBuild.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import mx.uv.djdl.champBuild.model.ChampBuild;
+import mx.uv.djdl.champBuild.repository.ChampBuildRepository;
 
 import java.util.List;
 

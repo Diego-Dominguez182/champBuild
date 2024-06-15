@@ -1,6 +1,9 @@
-package mx.uv.djdl.champBuild;
+package mx.uv.djdl.champBuild.controller;
 
 import jakarta.validation.Valid;
+import mx.uv.djdl.champBuild.model.ChampBuild;
+import mx.uv.djdl.champBuild.service.ChampBuildService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
