@@ -5,9 +5,7 @@ import org.springframework.stereotype.Repository;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-
 import mx.uv.djdl.champBuild.model.ChampBuild;
-
 import org.bson.Document;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,38 +45,52 @@ public class ChampBuildRepository {
 
     public void save(ChampBuild build) {
         Document query = new Document("champName", build.getChampName())
-                         .append("items", build.getItems());
+        .append("items", build.getItems());
         if (collection.find(query).first() != null) {
             throw new IllegalArgumentException("Ya existe una build con el mismo champName y lista de items");
         } 
-        else {
         Document doc = champBuildToDocument(build);
         collection.insertOne(doc);
-    }}
-    
-
-    public void update(ChampBuild build) {
-        Document query = new Document("champName", build.getChampName());
-        Document doc = champBuildToDocument(build);
-        collection.replaceOne(query, doc);
     }
 
-    public void delete(String name) {
-        Document query = new Document("champName", name);
-        collection.deleteOne(query);
+    public void update(ChampBuild build) {
+        Document query = new Document("champName", build.getChampName())
+        .append("userName", build.getUserName())
+        .append("buildTitle", build.getBuildTitle());
+        if (collection.find(query).first() != null) {
+            Document doc = champBuildToDocument(build);
+            collection.replaceOne(query, doc);
+        } else {
+            throw new IllegalArgumentException("La build a actualizar no existe");
+        }
+    }
+
+    public void delete(ChampBuild build) {
+        Document query = new Document("champName", build.getChampName())
+        .append("userName", build.getUserName())
+        .append("items", build.getItems());
+        if (collection.find(query).first() != null) {
+            collection.deleteOne(query);
+        } else {
+            throw new IllegalArgumentException("La build a eliminar no existe");
+        }
     }
 
     private Document champBuildToDocument(ChampBuild build) {
-        return new Document("champName", build.getChampName())
+        return new Document("buildTitle", build.getBuildTitle())
+                .append("champName", build.getChampName())
                 .append("items", build.getItems())
                 .append("userName", build.getUserName());
     }
+    
 
     private ChampBuild documentToChampBuild(Document doc) {
         ChampBuild build = new ChampBuild();
+        build.setBuildTitle(doc.getString("buildTitle")); 
         build.setChampName(doc.getString("champName"));
         build.setItems((List<String>) doc.get("items"));
         build.setUserName(doc.getString("userName"));
         return build;
     }
+    
 }

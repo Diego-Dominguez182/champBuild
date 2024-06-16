@@ -24,4 +24,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleGeneralException(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error al procesar la solicitud: " + ex.getMessage());
     }
+
+    
 }
