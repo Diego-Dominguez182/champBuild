@@ -1,32 +1,41 @@
-
 pipeline {
     agent any
+
+
 
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
-            }
+                git branch: 'main', url: 'https://github.com/Diego-Dominguez182/champBuild.git'  
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                sh 'chmod +x mvnw'
+                sh './mvnw clean package'  
             }
         }
 
-        stage('Test (Optional)') {
+        stage('Test') {
             steps {
-                sh 'mvn verify'
+                sh './mvnw test' 
             }
         }
 
-        stage('Deploy (Optional)') {
+        stage('Deploy') {
             steps {
-                script {
-                   
-                }
+                sh './mvnw install -DskipTests' 
+                sh 'java -jar target/ChampBuildApplication.jar &'  
             }
+        }
+    }
+
+    post {
+        success {
+            echo '¡Despliegue exitoso!'
+        }
+        failure {
+            echo 'El despliegue ha fallado. Revisar logs para más detalles.'
         }
     }
 }
