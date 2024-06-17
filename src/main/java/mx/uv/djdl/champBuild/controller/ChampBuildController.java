@@ -56,11 +56,11 @@ public class ChampBuildController {
         }
     }
 
-    @DeleteMapping("/{name}")
-    public ResponseEntity<Void> deleteBuild(@PathVariable String name, @Valid @RequestBody ChampBuildDTO buildDTO) {
+    @DeleteMapping("/{name}/{buildTitle}")
+    public ResponseEntity<Void> deleteBuild(@PathVariable String name, @PathVariable String buildTitle) {
         List<ChampBuildDTO> existingBuilds = champBuildService.getBuildByName(name);
         if (!existingBuilds.isEmpty()) {
-            champBuildService.deleteBuild(buildDTO);
+            champBuildService.deleteBuild(buildTitle);
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();

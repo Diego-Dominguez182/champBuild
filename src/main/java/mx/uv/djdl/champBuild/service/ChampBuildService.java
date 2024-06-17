@@ -42,8 +42,7 @@ public class ChampBuildService {
         champBuildRepository.update(build);
     }
 
-    public void deleteBuild(ChampBuildDTO buildDTO) {
-        ChampBuild build = champBuildMapper.toEntity(buildDTO);
-        champBuildRepository.delete(build);
+    public void deleteBuild(String buildTitle) {
+        champBuildRepository.delete(buildTitle);
     }
 }
