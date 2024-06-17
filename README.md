@@ -1,8 +1,6 @@
-**Este documento proporciona una descripción general de la API ChampBuild, una aplicación Spring Boot diseñada para administrar builds de campeones en un juego como League of Legends.
-**
+**Este documento proporciona una descripción general de la API ChampBuild, una aplicación Spring Boot diseñada para administrar builds de campeones en un juego como League of Legends.**
 
-**Características
-**
+**Características**
 Operaciones CRUD: Crea, lee, actualiza y elimina builds de campeones.
 Búsqueda por nombre: Encuentra builds para campeones específicos.
 Validación: Garantiza la integridad de los datos con la validación a nivel de campo.
@@ -10,8 +8,7 @@ Manejo de excepciones: Proporciona mensajes de error informativos para diversos 
 Persistencia de datos: Almacena builds en una base de datos MongoDB.
 Paquetes
 
-**El código base está organizado en los siguientes paquetes:
-**
+**El código base está organizado en los siguientes paquetes:**
 
 controller: Maneja las solicitudes HTTP entrantes e interactúa con la capa de servicio.
 dto: Define objetos de transferencia de datos (DTOs) para representar datos de build.
@@ -23,8 +20,7 @@ service: Lógica de negocio para gestionar las operaciones de build.
 Puntos de Entrada de la API
 
 
-**La API expone los siguientes puntos de entrada:
-**
+**La API expone los siguientes puntos de entrada:**
 GET /api/builds: Recupera todas las builds disponibles.
 
 GET /api/builds/{name}: Recupera builds asociadas con el nombre del campeón especificado.
@@ -36,8 +32,7 @@ PUT /api/builds/{name}: Actualiza una build existente (requiere un objeto ChampB
 DELETE /api/builds/{name}/{buildTitle}: Elimina una build específica identificada tanto por el nombre del campeón como por el título de la build dentro de la ruta.
 
 
-**Modelo de Datos
-**
+**Modelo de Datos**
 La clase ChampBuildDTO representa una build de campeón con las siguientes propiedades:
 
 buildTitle: El título único de la build (obligatorio, no vacío).
@@ -49,8 +44,7 @@ items: Una lista de seis nombres de elementos (obligatorio, no vacío, el tamañ
 userName: El nombre de usuario del jugador que creó la build (obligatorio, no vacío).
 
 
-**Uso
-**
+**Uso**
 Descargue y ejecute la aplicación main.
 
 El programa debería funcionar sin necesidad de configuraciones de base de datos.
