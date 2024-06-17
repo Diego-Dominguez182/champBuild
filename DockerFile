@@ -1,14 +1,21 @@
-# Usar una imagen base de OpenJDK
-FROM openjdk:17-jdk-slim
+# Base image
+FROM openjdk:17-slim
 
-# Establecer el directorio de trabajo en el contenedor
+# Set working directory
 WORKDIR /app
 
-# Copiar el archivo JAR generado por Maven al contenedor
-COPY target/champ-build-0.0.1-SNAPSHOT.jar app.jar
+# Copy project files
+COPY . .
 
-# Exponer el puerto que la aplicación usará
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y maven
+
+# Build the project
+RUN mvn clean package
+
+# Expose port
 EXPOSE 8080
 
-# Comando para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Start the application
+CMD ["java", "-jar", "target/champBuild-0.0.1-SNAPSHOT.jar"]
