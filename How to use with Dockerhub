@@ -1,0 +1,16 @@
+Para poder utilizar esta API sin necesidad de descargar directamente el código, utilizaremos docker.
+
+1.- docker pull huntermick182/champ_build:lastest
+    Este comando sirve para hacer una copia local a nuestro equipo del contenedor alojado en la cuenta
+    "huntermick182" con el nombre de contenedor "champ_build" con la versión "lastest"
+
+
+
+2.- docker run -p 8080:8080 huntermick182/champ_build:lastest
+    Este comando sirve para correr el contenedor previamente descargado, con el -p indicamos el puerto
+    que quiere ser usado para nuestro localhost, indicamos de que cuenta queremos correr el contenedo
+    y el nombre del contenedor.
+
+Con estos dos sencillos pasos, podremos consultar en nuestro navegador "localhost:8080/api/builds" y
+obtendremos todas las builds cargadas en nuestra base de datos hasta el momento de la consulta.
+Con postman podremos hacer las diferentes cargas, actualizaciones y eliminaciones de las builds.
