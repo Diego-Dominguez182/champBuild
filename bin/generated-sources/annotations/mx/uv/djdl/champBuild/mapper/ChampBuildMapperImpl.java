@@ -8,7 +8,7 @@ import mx.uv.djdl.champBuild.model.ChampBuild;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-16T17:02:41-0600",
+    date = "2024-06-17T08:57:34-0600",
     comments = "version: 1.5.3.Final, compiler: Eclipse JDT (IDE) 3.38.0.v20240524-2033, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 public class ChampBuildMapperImpl implements ChampBuildMapper {
